@@ -29,7 +29,6 @@ def tokenize(program_text: str) -> List[Token]:
         text = program_text[pos:]
 
         if (m := re.match(r'\s+', text)):
-            pass
             eat = len(m.group(0))
         elif text[0] == '(':
             token_seq.append({
