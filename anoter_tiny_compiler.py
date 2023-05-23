@@ -121,17 +121,19 @@ def parse(token_seq: List[Token]) -> Ast:
 
 def compile(node: Ast, used_vars: List[str]) -> Tuple[str, Code]:
     """
-    Compile an Abstract Syntax Tree (AST) node into code.
-
     Recursively compile an Abstract Syntax Tree (AST) node into code.
-    This function is called recursively to handle nested expressions.
+
+    This function is called recursively to handle nested expressions. The 'used_vars' argument is a list
+    that keeps track of the names of the variables that are used in the code and need to be declared. 
+    New variable names are appended to this list as they are used.
 
     Raises a ValueError if an invalid node is encountered.
     """
 
-    code = []  # The generated code for the node
     node_type = node['type']
     if node_type == 'CallExpression':
+        code = []  # The generated code for the node
+
         # Prepare a variable to store the return value of the function call
         ret_var = f"v{len(used_vars)}"
         used_vars.append(ret_var)
