@@ -5,7 +5,7 @@ import re
 
 
 Token = Dict[str, str]
-Ast = Dict[str, Any]
+Node = Dict[str, Any]
 Code = List[str]
 
 
@@ -62,7 +62,7 @@ def tokenize(program_text: str) -> List[Token]:
     return token_seq
 
 
-def parse(token_seq: List[Token]) -> Ast:
+def parse(token_seq: List[Token]) -> Node:
     """
     Convert a list of tokens into an Abstract Syntax Tree (AST).
 
@@ -122,7 +122,7 @@ def parse(token_seq: List[Token]) -> Ast:
     return ast, pos
 
 
-def compile(node: Ast, used_vars: List[str]) -> Tuple[str, Code]:
+def compile(node: Node, used_vars: List[str]) -> Tuple[str, Code]:
     """
     Recursively compile an Abstract Syntax Tree (AST) node into code.
 
