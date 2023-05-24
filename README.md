@@ -14,4 +14,4 @@ Welcome to Another Tiny Compiler! This project is a concise yet comprehensive ex
 
 ## Getting Started
 
-To get started with Another Tiny Compiler, simply clone this repository and run the main.py file. Feel free to explore the code, make changes, and see what happens!
+To get started with Another Tiny Compiler, simply clone this repository and run the `another_tiny_compiler.py` file. Feel free to explore the code, make changes, and see what happens!
