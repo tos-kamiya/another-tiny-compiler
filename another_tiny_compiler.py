@@ -83,6 +83,10 @@ def parse(token_seq: List[Token]) -> Ast:
         """
 
         nonlocal pos
+
+        if pos >= len(token_seq):
+            raise IndexError(f"Unexpected EOF")
+
         token = token_seq[pos]
         token_type = token['type']
         if token_type == 'number':
@@ -115,7 +119,7 @@ def parse(token_seq: List[Token]) -> Ast:
             raise ValueError(f"Invalid token at position {pos}: {repr(token)}")
 
     ast = walk()
-    return ast
+    return ast, pos
 
 
 def compile(node: Ast, used_vars: List[str]) -> Tuple[str, Code]:
@@ -160,7 +164,7 @@ def main():
     token_seq = tokenize(program_text)
     # pprint(token_seq)
 
-    ast = parse(token_seq)
+    ast, _ = parse(token_seq)
     # pprint(ast)
 
     used_vars = []  # The names of the variables that are used in the code and need to be declared
