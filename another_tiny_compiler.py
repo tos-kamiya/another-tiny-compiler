@@ -75,9 +75,9 @@ def parse(token_seq: List[Token]) -> Node:
 
     pos = 0  # The position of token that currently investigated
 
-    def walk():
+    def build():
         """
-        Recursively walk through the list of tokens and generate the corresponding AST.
+        Scan the token sequence and generate the corresponding AST.
 
         This function is called recursively to handle nested expressions.
         """
@@ -110,7 +110,7 @@ def parse(token_seq: List[Token]) -> Node:
             pos += 1
             token = token_seq[pos]
             while token['type'] != 'rparen':
-                node['params'].append(walk())  # Node for the arguments goes `param` attribute of this node
+                node['params'].append(build())  # Node for the arguments goes `param` attribute of this node
                 token = token_seq[pos]
             pos += 1
 
@@ -118,7 +118,7 @@ def parse(token_seq: List[Token]) -> Node:
         else:
             raise ValueError(f"Invalid token at position {pos}: {repr(token)}")
 
-    ast = walk()
+    ast = build()
     return ast, pos
 
 
